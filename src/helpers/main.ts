@@ -1,3 +1,7 @@
+import 'dotenv/config'
+
+const { APP_DROPBOX_TOKEN, } = process.env;
+
 export const responseGet = () => {
     return {
         isSuccess: true,
@@ -7,3 +11,9 @@ export const responseGet = () => {
         result: <any>{},
     };
 }
+
+export const settings = Object.freeze({
+    dropbox: {
+        token: APP_DROPBOX_TOKEN,
+    }
+});

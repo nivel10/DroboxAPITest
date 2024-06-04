@@ -18,6 +18,7 @@
     "typescript": "5.4.5"
   },
   "dependencies": {
+    "dotenv": "16.4.5",
     "dropbox": "10.34.0",
     "express": "4.19.2"
   }

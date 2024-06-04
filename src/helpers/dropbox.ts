@@ -1,8 +1,8 @@
 import { Dropbox } from 'dropbox';
-import { responseGet } from './main';
+import { responseGet, settings } from './main';
 
 const dbx = new Dropbox({
-    accessToken: ''
+    accessToken: settings?.dropbox?.token,
 });
 
 export const fileGetAsync = async ({ dropboxFilePath = '', }) => {

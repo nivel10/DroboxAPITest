@@ -1,25 +1,17 @@
 import express from 'express';
 import { responseGet } from '../helpers/main';
-import { fileGetAsync, fileUrlDownloadGetAsync } from '../helpers/dropbox';
+import { fileDownloadGetAsync, filesListFolderGetAsync, fileTemporaryLinkGetAsync } from '../helpers/dropbox';
 
 const routerDropbox = express.Router();
 
-routerDropbox.get('/', async (_req, _res) => {
-    console?.log('dropbox get');
-    _res.send('api dropbox (get)');
-});
-
-routerDropbox.post('/filesGet', async (_req, _res) => {
+routerDropbox.post('/filesListFolderGet', async (_req, _res) => {
     let response = responseGet();
     try {
-        const folderPaths = {
-            chej: '/SF - CHEJ Consultor, C.A. - Oficina/CHEJ Consultor, C.A',
-            office: '/SF - CHEJ Consultor, C.A. - Oficina',
-            serviceOrders: '/SF - CHEJ Consultor, C.A. - Oficina/CHEJ Consultor, C.A/Ord. de Servicio (Digitalizadas)',
-            yecary: '/SF - CHEJ Consultor, C.A. - Oficina/chej consultor, c.a/Ord. de Servicio (Digitalizadas)/Etiquetas Yecary, C.A',
-        };
+        const { path = '', } = _req?.body;
 
-        response = await fileGetAsync({ dropboxFilePath: folderPaths?.yecary, });
+        response = await filesListFolderGetAsync({
+            dropboxFilePath: path,
+        });
     } catch (ex: any) {
         response.isSuccess = false;
         response.msgType = -1;
@@ -28,22 +20,29 @@ routerDropbox.post('/filesGet', async (_req, _res) => {
     _res.json(response);
 });
 
-routerDropbox.post('/fileGet', async (_req, _res) => {
+routerDropbox.post('/fileTemporaryLinkGet', async (_req, _res) => {
     let response = responseGet();
     try {
-        const filePaths = {
-            yec651: {
-                id: 'id:kwwpYfd6NIAAAAAAAAAO7A',
-                name: '/SER-YEC651.pdf',
-                path: '/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio (digitalizadas)/etiquetas yecary, c.a/ser-yec651.pdf',
-                rev: '17b63ee851f4',
-            }
-        };
+        const { path = '', } = _req?.body;
 
-        response = await fileUrlDownloadGetAsync({
-            //filePath: filePaths?.yec651.path,
-            filePath: filePaths?.yec651.path,
-            //rev: undefined,
+        response = await fileTemporaryLinkGetAsync({
+            filePath: path,
+        });
+    } catch (ex: any) {
+        response.isSuccess = false;
+        response.msgType = -1;
+        response.msgText = `Error: ${ex.message}`;
+    }
+    _res.json(response);
+});
+
+routerDropbox.post('/fileDownloadGet', async (_req, _res) => {
+    let response = responseGet();
+    try {
+        const { path = '', } = _req?.body;
+
+        response = await fileDownloadGetAsync({
+            filePath: path,
         });
     } catch (ex: any) {
         response.isSuccess = false;

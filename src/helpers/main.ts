@@ -15,5 +15,8 @@ export const responseGet = () => {
 export const settings = Object.freeze({
     dropbox: {
         token: APP_DROPBOX_TOKEN,
-    }
+        errors: {
+            not_file: 'not_file',
+        },
+    },
 });

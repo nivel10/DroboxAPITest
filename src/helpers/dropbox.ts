@@ -42,6 +42,7 @@ export const fileTemporaryLinkGetAsync = async ({ filePath = '', }) => {
                 response.isWarning = true;
                 response.msgType = 1;
                 response.msgText += `Error: ${ex?.error?.error?.path?.[".tag"]}<br/>`;
+                response.msgText += `Sumary: ${ex?.error?.error_summary || ''}<br/>`;
                 break;
             default:
                 response.isSuccess = false;
@@ -87,26 +88,29 @@ export const fileDownloadGetAsync = async ({ filePath = '', }) => {
     return response;
 }
 
-// export const fileTemporaryLinkGetAsync = async ({ filePath = '', }) => {
-//     const currentMethod = 'fileTemporaryLinkGetAsync';
-//     let response = responseGet();
-//     try {
-//         const result = await dbx.filesGetTemporaryLink({ path: filePath });
-
-//         // const result = await dbx.filesDownload({ path: filePath });
-//         // const fileUrl = result;
-
-//         //const result = await dbx.filesGetPreview({ path: filePath, rev: rev });
-//         //const result = await dbx.filesGetPreview({ path: filePath, });
-//         //const fileUrl = result;
-
-//         response.result = result;
-//     } catch (ex: any) {
-//         response.isSuccess = false;
-//         response.msgType = -1;
-//         response.msgText = `Method: ${currentMethod}<br/>`;
-//         response.msgText += `Error: ${ex?.error}<br/>`;
-//         response.msgText += `Message: ${ex.message}`
-//     }
-//     return response;
-// }
+export const filePreviewGetAsync = async ({ filePath = '', }) => {
+    const currentMethod = 'fileTemporaryLinkGetAsync';
+    let response = responseGet();
+    try {
+        const result = await dbx.filesGetPreview({ path: filePath, });
+        //response.result = result;
+        response.result = result?.result;
+    } catch (ex: any) {
+        response.msgText = `Method: ${currentMethod}<br/>`;
+        const errorTag = ex?.error?.error?.path?.[".tag"] || '';
+        switch (errorTag) {
+            case settings?.dropbox?.errors?.not_file:
+                response.isWarning = true;
+                response.msgType = 1;
+                response.msgText += `Error: ${ex?.error?.error?.path?.[".tag"]}<br/>`;
+                response.msgText += `Sumary: ${ex?.error?.error_summary || ''}<br/>`;
+                break;
+            default:
+                response.isSuccess = false;
+                response.msgType = -1;
+                break;
+        }
+        response.msgText += `Message: ${ex.message}`
+    }
+    return response;
+}

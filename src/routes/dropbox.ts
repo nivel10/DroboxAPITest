@@ -1,6 +1,6 @@
 import express from 'express';
 import { responseGet } from '../helpers/main';
-import { fileDownloadGetAsync, filesListFolderGetAsync, fileTemporaryLinkGetAsync } from '../helpers/dropbox';
+import { fileDownloadGetAsync, filePreviewGetAsync, filesListFolderGetAsync, fileTemporaryLinkGetAsync } from '../helpers/dropbox';
 
 const routerDropbox = express.Router();
 
@@ -42,6 +42,22 @@ routerDropbox.post('/fileDownloadGet', async (_req, _res) => {
         const { path = '', } = _req?.body;
 
         response = await fileDownloadGetAsync({
+            filePath: path,
+        });
+    } catch (ex: any) {
+        response.isSuccess = false;
+        response.msgType = -1;
+        response.msgText = `Error: ${ex.message}`;
+    }
+    _res.json(response);
+});
+
+routerDropbox.post('/filePreviewGet', async (_req, _res) => {
+    let response = responseGet();
+    try {
+        const { path = '', } = _req?.body;
+
+        response = await filePreviewGetAsync({
             filePath: path,
         });
     } catch (ex: any) {

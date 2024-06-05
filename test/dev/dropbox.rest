@@ -2,52 +2,36 @@ POST http://localhost:3000/api/v1/dropbox/filesListFolderGet HTTP/1.1
 Content-Type: application/json
 
 {
-    "path": "/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio/etiquetas yecary, c.a"
+    "path": ""
 }
-###/sf - chej consultor, c.a. - oficina
-###/sf - chej consultor, c.a. - oficina/chej consultor, c.a
-###/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio (digitalizadas)
-###/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio (digitalizadas)/etiquetas yecary, c.a
-
-###/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio
-###/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio/etiquetas yecary, c.a
 
 ###
 POST http://localhost:3000/api/v1/dropbox/fileTemporaryLinkGet HTTP/1.1
 Content-Type: application/json
 
 {
-    "path": "/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio/etiquetas yecary, c.a/ser-yec652.doc"
+    "path": ""
 }
-
-###/SF - CHEJ Consultor, C.A. - Oficina/chej consultor, c.a/ord. de servicio (digitalizadas)/Etiquetas Yecary, C.A/SER-YEC653.pdf
-###/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio/etiquetas yecary, c.a/ser-yec652.doc
 
 ###
 POST http://localhost:3000/api/v1/dropbox/fileDownloadGet HTTP/1.1
 Content-Type: application/json
 
 {
-    "path": "/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio/etiquetas yecary, c.a/ser-yec652.doc"
+    "path": ""
 }
-
-##/SF - CHEJ Consultor, C.A. - Oficina/chej consultor, c.a/ord. de servicio (digitalizadas)/Etiquetas Yecary, C.A/SER-YEC653.pdf
-###/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio/etiquetas yecary, c.a/ser-yec652.doc
 
 ###
 POST http://localhost:3000/api/v1/dropbox/filePreviewGet HTTP/1.1
 Content-Type: application/json
 
 {
-    "path": "/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio/etiquetas yecary, c.a/ser-yec652.doc"
+    "path": ""
 }
-
-##/SF - CHEJ Consultor, C.A. - Oficina/chej consultor, c.a/ord. de servicio (digitalizadas)/Etiquetas Yecary, C.A/SER-YEC653.pdf
-###/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio/etiquetas yecary, c.a/ser-yec652.doc
 
 ###
 POST https://content.dropboxapi.com/2/files/get_preview HTTP/1.1
 #Content-Type: application/json
-Dropbox-API-Arg: {"path": "/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio/etiquetas yecary, c.a/ser-yec652.doc"}
+Dropbox-API-Arg: {"path": ""}
 
-##{"path": "/sf - chej consultor, c.a. - oficina/chej consultor, c.a/ord. de servicio (digitalizadas)/etiquetas yecary, c.a/ser-yec651.pdf"}
+##{"path": ""}
